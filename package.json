@@ -1,0 +1,47 @@
+{
+  "_from": "bloxlink@1.2.0",
+  "_id": "bloxlink@1.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-5hvqaXKIWsRucYXnoyPhWvqZMT6A9oZt3D7x82gcB8zTYZ68vG6GegXQXb/90d9GBR0qZ+qXTXlMgbH95OMTrw==",
+  "_location": "/bloxlink",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "bloxlink@1.1.0",
+    "name": "bloxlink",
+    "escapedName": "bloxlink",
+    "rawSpec": "1.1.0",
+    "saveSpec": null,
+    "fetchSpec": "1.1.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bloxlink/-/bloxlink-1.1.0.tgz",
+  "_shasum": "99c2306644a525ce81b95c744aaec2f6e93bc87b",
+  "_spec": "bloxlink@1.1.0",
+  "_where": "C:\\Users\\Juan\\Desktop\\bloxlinkNpmTest",
+  "author": {
+    "name": "enjoyablee"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "deprecated": false,
+  "description": "A package to interact with the Bloxlink API Easily!",
+  "keywords": [
+    "bloxlink",
+    "roblox",
+    "verify"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "bloxlink",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.5.1"
+}
