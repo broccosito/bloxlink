@@ -1,44 +1,47 @@
-# Bloxlink API
+# The Bloxlink API
 
-bloxlink is a simple npm module to interact with the biggest Roblox Discord Bot, Bloxlink and with his API.
+`bloxlink` is a simple NPM module to interact with the [Bloxlink](https://blox.link/developers) API.
 
 ## Installation
 
-Using [npm](https://www.npmjs.com/) to install bloxlink.
+Use [NPM](https://www.npmjs.com/) to install Bloxlink.
 
-```bash
-npm install bloxlink@latest  
+```
+npm install bloxlink@latest
 ```
 
 ## Example
 
-```javascript
-const bloxlink = require('bloxlink');
+```js
+import getBloxlinkUser from "bloxlink";
 
-(async() => {
-let getroblox = await bloxlink('528288312448909312');
-
-console.log(getroblox);
-}) ()
-
+(async () => {
+  console.log(
+    await getBloxlinkUser("528288312448909312", "372036754078826496")
+  );
+})();
 ```
 
-The example above will log on the console the information of the linked account on bloxlink with the user id 528288312448909312:
+The example above will log the information of the linked account on Bloxlink with the user ID of `528288312448909312`:
 
-```javascript
-{ discordId: '528288312448909312', robloxId: '263468606', robloxUsername: 'TheMasterMuff' }
+```json
+{
+  "discordId": "528288312448909312",
+  "robloxId": "263468606",
+  "robloxUsername": "TheMasterMuff"
+}
 ```
 
-If there is no account linked it will return something like:
+If there is no Bloxlink account linked with a user it will return:
 
-```javascript
-{ status: 'error', error: 'This user is not linked with Bloxlink.' }
+```json
+{ "status": "error", "error": "This user is not linked with Bloxlink." }
 ```
 
-If you hit the limit of 60 request per 60 seconds it will return something like:
+If you hit the rate-limit of 60 requests per 60 seconds it will return:
 
-```javascript
-{ status: 'error', error: 'You are being ratelimited.'}
+```json
+{ "status": "error", "error": "You are being ratelimited." }
 ```
 
-Hope this makes your life a bit easier, have a good day!
+Hope this makes your life a bit easier, have a good one!

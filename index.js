@@ -1,33 +1,53 @@
-const fetch = require('node-fetch')
+// @ts-check
 
-async function bloxlink(user_id){
-    if(!user_id) return { error: 'Missing Discord ID.' }
-    if (typeof user_id != "string") return { error: 'Discord ID Parameter needs to be a string.' }
-    let numbercheck = isNaN(user_id)
-    if(numbercheck === true) return { error: 'Invalid Discord ID.' }
-    let base_url = 'https://api.blox.link/v1/'
-    let roblox_base_url = 'https://api.roblox.com/users/'
+import fetch from "node-fetch";
 
-    let request_api = await fetch(base_url + `user/${user_id}`)
-    
-    if(request_api.status === 429) {
-        return { status: 'error', error: 'You are being ratelimited.'}
-    }
+export const baseBloxlinkAPIUrl = "https://api.blox.link/v1/";
+export const baseRobloxAPIUrl = "https://api.roblox.com/";
 
-    let response_api = await request_api.json()
+/**
+ * @param {string|number} userId
+ * @param {string|number} [guildId]
+ */
+export default async function getBloxlinkUser(userId, guildId) {
+  // Parameter Checks
+  if (!userId) return { error: "Did not provide 'userId' parameter." };
+  if (isNaN(Number(userId)))
+    return { error: "The 'userId' parameter must be a number." };
+  if (guildId && isNaN(Number(userId)))
+    return { error: "The 'guildId' parameter must be a number." };
 
+  // Send API request to Bloxlink for information
+  let response;
+  if (guildId) {
+    response = await (
+      await fetch(`${baseBloxlinkAPIUrl}user/${userId}?guild=${guildId}`)
+    ).json();
+  } else {
+    response = await (
+      await fetch(`${baseBloxlinkAPIUrl}user/${userId}`)
+    ).json();
+  }
 
-    if(response_api.error === "This user is not linked with Bloxlink.") {
-        return response_api
-    }
-    
+  // Check if being ratelimited
+  if (response.status === 429) {
+    return { status: "error", error: "You are being ratelimited." };
+  }
 
-    const username_request = await fetch(roblox_base_url + response_api.primaryAccount)
-    const username_response = await username_request.json()
+  // Handle user not being linked with Bloxlink
+  if (response.error === "This user is not linked with Bloxlink.") {
+    return response;
+  }
 
-    const finalres = { discordId: user_id, robloxId: response_api.primaryAccount, robloxUsername: username_response.Username}
-    return finalres
+  // Get latest username
+  const username = await (
+    await fetch(`${baseRobloxAPIUrl}users/${response.primaryAccount}`)
+  ).json();
+
+  // Return data
+  return {
+    discordId: userId,
+    robloxId: response.primaryAccount,
+    robloxUsername: username.Username,
+  };
 }
-
-module.exports = bloxlink;
-
