@@ -1,5 +1,3 @@
-# The Bloxlink API
-
 `bloxlink` is a simple NPM module to interact with the [Bloxlink](https://blox.link/developers) API.
 
 ## Installation
