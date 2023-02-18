@@ -14,5 +14,6 @@ interface User {
 
 export default async function getBloxlinkUser(
   userId: string | number, 
-  guildId?: string | number
+  apiKey: string,
+  guildId?: string | number,
 ): Promise<User | ResponseError>
